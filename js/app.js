@@ -1,3 +1,7 @@
+var canvasWidth = 505;
+var canvasHeight = 606;
+
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -5,13 +9,15 @@ var Enemy = function() {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+
     this.sprite = 'images/enemy-bug.png';
-    this.x = 1;
+    this.x = 0;
 
-    //Setting initial position below water tile;
-    this.y = Math.random(1,513);
-
-    this.speed = 1;
+    //Setting initial position below water tile
+    this.y = Math.floor(Math.random() * 171 + 45) % 171;
+    
+    //Setting initial speed of enemy
+    this.speed = 50;
 
 };
 
@@ -22,15 +28,19 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-
-    this.x *= dt;
-    this.y *= dt;
+    
+    this.x += this.speed * dt;
+    
 
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+
+
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+
 };
 
 // Now write your own player class
@@ -38,28 +48,56 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
 
-    //Subclassing Enemy class
-    Enemy.call(this);
+    //Setting default character     
+    this.sprite = 'images/char-boy.png';
+
+    //Setting position to starting tile
+    this.x = canvasWidth *.4;
+    this.y = canvasHeight * .65;
     
 
-    //Setting default character  
-    this.sprite = 'images/char-boy.png';
-    this.x = 200;
-    this.y = 200;
     
 };
 
 
 //Delegating methods to Enemy class
 Player.prototype = Object.create(Enemy.prototype);
-
-//Correctly setting constructor
 Player.prototype.constructor = Player;
 
-Player.prototype.handleInput = handleInput(){
+//Adding additional methods
+
+Player.prototype.handleInput = function(key){
 
 
+    if(key === 'up'){
 
+        this.y -= 85;
+
+    } else if(key === 'down'){
+
+
+        this.y += 85;
+
+
+    } else if(key === 'left'){
+
+
+        this.x -= 100;
+
+
+    } else if(key ==='right'){
+
+        this.x += 100;
+
+
+    }
+
+
+};
+
+Player.prototype.update = function(){
+
+    this.x += 0;
 
 
 };
@@ -72,14 +110,14 @@ Player.prototype.handleInput = handleInput(){
 // Place the player object in a variable called player
 
 var enemy1 = new Enemy();
-var enemy2 = new Enemy();
-var enemy3 = new Enemy();
+//var enemy2 = new Enemy();
+//var enemy3 = new Enemy();
 var player = new Player();
 var allEnemies = [];
 
 allEnemies.push(enemy1);
-allEnemies.push(enemy2);
-allEnemies.push(enemy3);
+//allEnemies.push(enemy2);
+//allEnemies.push(enemy3);
 
 
 
