@@ -9,15 +9,15 @@ var Enemy = function() {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-
+    var startingLocations = [55, 140, 220];
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
 
     //Setting initial position below water tile
-    this.y = Math.floor(Math.random() * 513 + 45) % 171;
+    this.y = startingLocations[Math.floor(Math.random() * startingLocations.length)];
     
     //Setting initial speed of enemy
-    this.speed = 100;
+    this.speed = Math.floor(Math.random() * 100 + 50);
 
 };
 
@@ -66,10 +66,8 @@ Player.prototype.constructor = Player;
 
 //Adding additional methods
 
+//Handles player input using arrow keys
 Player.prototype.handleInput = function(key){
-
-    console.log(this.x);
-    console.log(this.y);
 
 
     if(key === 'up'){
@@ -107,14 +105,12 @@ Player.prototype.handleInput = function(key){
         }
 
         
-
-
     }
 
 
 };
 
-//Not used
+//Not used, but overwrites Enemy update
 Player.prototype.update = function(){};
 
 
@@ -125,14 +121,14 @@ Player.prototype.update = function(){};
 // Place the player object in a variable called player
 
 var enemy1 = new Enemy();
-//var enemy2 = new Enemy();
-//var enemy3 = new Enemy();
+var enemy2 = new Enemy();
+var enemy3 = new Enemy();
 var player = new Player();
 var allEnemies = [];
 
 allEnemies.push(enemy1);
-//allEnemies.push(enemy2);
-//allEnemies.push(enemy3);
+allEnemies.push(enemy2);
+allEnemies.push(enemy3);
 
 
 
