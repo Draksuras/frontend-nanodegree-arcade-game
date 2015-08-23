@@ -14,10 +14,10 @@ var Enemy = function() {
     this.x = 0;
 
     //Setting initial position below water tile
-    this.y = Math.floor(Math.random() * 171 + 45) % 171;
+    this.y = Math.floor(Math.random() * 513 + 45) % 171;
     
     //Setting initial speed of enemy
-    this.speed = 50;
+    this.speed = 100;
 
 };
 
@@ -68,26 +68,45 @@ Player.prototype.constructor = Player;
 
 Player.prototype.handleInput = function(key){
 
+    console.log(this.x);
+    console.log(this.y);
+
 
     if(key === 'up'){
+        if((this.y - 85) > 0){
 
-        this.y -= 85;
+            this.y -= 85;
+
+        }
+        
 
     } else if(key === 'down'){
 
+        if((this.y + 85) < canvasHeight - 150){
+            
+            this.y += 85;
 
-        this.y += 85;
+        }
+        
 
 
     } else if(key === 'left'){
 
+        if((this.x - 100) > 0){
+            
+            this.x -= 100;
 
-        this.x -= 100;
-
+        }
 
     } else if(key ==='right'){
 
-        this.x += 100;
+        if((this.x + 100) < canvasWidth - 100){
+
+            this.x += 100;
+
+        }
+
+        
 
 
     }
@@ -95,12 +114,8 @@ Player.prototype.handleInput = function(key){
 
 };
 
-Player.prototype.update = function(){
-
-    this.x += 0;
-
-
-};
+//Not used
+Player.prototype.update = function(){};
 
 
 
