@@ -9,7 +9,7 @@ var Enemy = function() {
     this.x = 1;
 
     //Setting initial position below water tile;
-    this.y = 172;
+    this.y = Math.random(1,513);
 
     this.speed = 1;
 
@@ -43,7 +43,9 @@ var Player = function() {
     
 
     //Setting default character  
-    this.sprite = 'images/char-cat-girl.png';
+    this.sprite = 'images/char-boy.png';
+    this.x = 200;
+    this.y = 200;
     
 };
 
@@ -54,13 +56,13 @@ Player.prototype = Object.create(Enemy.prototype);
 //Correctly setting constructor
 Player.prototype.constructor = Player;
 
-// Player.prototype.handleInput = handleInput(){
+Player.prototype.handleInput = handleInput(){
 
 
 
 
 
-// };
+};
 
 
 
@@ -70,10 +72,14 @@ Player.prototype.constructor = Player;
 // Place the player object in a variable called player
 
 var enemy1 = new Enemy();
+var enemy2 = new Enemy();
+var enemy3 = new Enemy();
 var player = new Player();
 var allEnemies = [];
 
 allEnemies.push(enemy1);
+allEnemies.push(enemy2);
+allEnemies.push(enemy3);
 
 
 
