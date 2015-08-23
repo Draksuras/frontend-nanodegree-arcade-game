@@ -28,8 +28,14 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
+    var playerPosition = player.playerPosition();
 
-    
+    //Range to compensate for floating point comparison
+    var epsilon = 50;
+
+    diffX = Math.abs(this.x - playerPosition[0]);
+    diffY = Math.abs(this.y - playerPosition[1]);
+
     this.x += this.speed * dt;
 
     if(this.x > canvasWidth){
@@ -39,8 +45,13 @@ Enemy.prototype.update = function(dt) {
         this.speed = Math.floor(Math.random() * 100 + 50);
     }
 
-    
-    
+    if(diffX <= epsilon && diffY <= epsilon){
+
+        player.setPlayerPosition(canvasWidth*.4, canvasHeight * .65);
+
+
+    }
+
 
 };
 
@@ -123,7 +134,24 @@ Player.prototype.handleInput = function(key){
 //Not used, but overwrites Enemy update
 Player.prototype.update = function(){};
 
+//Returns player objects position on the canvas in an array
+Player.prototype.playerPosition = function(){
 
+    var position = [];
+
+    position.push(this.x);
+    position.push(this.y);
+
+    return position;
+
+};
+
+Player.prototype.setPlayerPosition = function(x,y){
+
+    this.x = x;
+    this.y = y;
+
+};
 
 
 // Now instantiate your objects.
