@@ -1,6 +1,6 @@
 var canvasWidth = 505;
 var canvasHeight = 606;
-
+var startingLocations = [55, 140, 220];
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -9,7 +9,7 @@ var Enemy = function() {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    var startingLocations = [55, 140, 220];
+
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
 
@@ -28,8 +28,18 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
+
     
     this.x += this.speed * dt;
+
+    if(this.x > canvasWidth){
+
+        this.x = -50;
+        this.y = startingLocations[Math.floor(Math.random() * startingLocations.length)];
+        this.speed = Math.floor(Math.random() * 100 + 50);
+    }
+
+    
     
 
 };
@@ -49,7 +59,7 @@ Enemy.prototype.render = function() {
 var Player = function() {
 
     //Setting default character     
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-cat-girl.png';
 
     //Setting position to starting tile
     this.x = canvasWidth *.4;
