@@ -6,6 +6,7 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+<<<<<<< HEAD
     this.x = 1;
 
     //Setting initial position below water tile;
@@ -13,6 +14,8 @@ var Enemy = function() {
 
     this.speed = 1;
 
+=======
+>>>>>>> origin/master
 };
 
 // Update the enemy's position, required method for game
@@ -21,11 +24,14 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+<<<<<<< HEAD
 
     this.x *= dt;
     this.y *= dt;
 
 
+=======
+>>>>>>> origin/master
 };
 
 // Draw the enemy on the screen, required method for game
