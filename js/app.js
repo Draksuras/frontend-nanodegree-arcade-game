@@ -75,6 +75,9 @@ var Player = function() {
     //Setting position to starting tile
     this.x = canvasWidth *.4;
     this.y = canvasHeight * .65;
+
+    //Initial player score
+    this.score = 0;
     
 
     
@@ -99,6 +102,8 @@ Player.prototype.handleInput = function(key){
         } else if((this.y -85 <= 0)){
 
             this.setPlayerPosition(canvasWidth * 0.4, canvasHeight * 0.65);
+            this.score += 10;
+            console.log(this.score);
 
         }
         
