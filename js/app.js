@@ -1,6 +1,8 @@
 var canvasWidth = 505;
 var canvasHeight = 606;
-var startingLocations = [55, 140, 220];
+
+var startingXLocations = [0, 101, 202, 405]
+var startingYLocations = [55, 140, 220];
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -14,7 +16,7 @@ var Enemy = function() {
     this.x = 0;
 
     //Setting initial position below water tile
-    this.y = startingLocations[Math.floor(Math.random() * startingLocations.length)];
+    this.y = startingYLocations[Math.floor(Math.random() * startingYLocations.length)];
     
     //Setting initial speed of enemy
     this.speed = Math.floor(Math.random() * 100 + 50);
@@ -41,13 +43,14 @@ Enemy.prototype.update = function(dt) {
     if(this.x > canvasWidth){
 
         this.x = -50;
-        this.y = startingLocations[Math.floor(Math.random() * startingLocations.length)];
+        this.y = startingYLocations[Math.floor(Math.random() * startingYLocations.length)];
         this.speed = Math.floor(Math.random() * 100 + 50);
     }
 
     if(diffX <= epsilon && diffY <= epsilon){
 
         player.setPlayerPosition(canvasWidth*.4, canvasHeight * .65);
+        player.resetScore();
 
 
     }
@@ -154,6 +157,8 @@ Player.prototype.playerPosition = function(){
 
 };
 
+
+//Method for setting the player's position
 Player.prototype.setPlayerPosition = function(x,y){
 
     this.x = x;
@@ -161,12 +166,31 @@ Player.prototype.setPlayerPosition = function(x,y){
 
 };
 
+
+//Method for resetting the player's score
+Player.prototype.resetScore = function(){
+
+    this.score = 0;
+
+};
+
+
+//Method for increasing player's score
+Player.prototype.increaseScore = function(amount){
+
+    this.score += amount;
+
+
+};
+
+
+//Renders player and player score on canvas
 Player.prototype.render = function() {
 
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
-    //Renders current player score onto canvas
 
+    //Renders current player score onto canvas
     ctx.font = "20px Arial";
     ctx.lineWidth = 3;
     ctx.strokeStyle = "black";
@@ -175,20 +199,69 @@ Player.prototype.render = function() {
     ctx.fillText("Current Score: " + this.score, 5, 70);
 
 
-}
+};
 
 
-// var Item = function(){
+var Item = function(){
 
-//     var gems = ['images/Gem Blue.png','images/Gem Green.png','images/Gem Orange.png'];
+    var gems = ['images/Gem Blue.png','images/Gem Green.png','images/Gem Orange.png'];
+
+    //Randomly chooses gem
+    this.sprite = gems[Math.floor(Math.random()* gems.length)];
+
+    this.x = startingXLocations[Math.floor(Math.random() * startingXLocations.length)];
+    this.y = startingYLocations[Math.floor(Math.random() * startingYLocations.length)];
+
+    //Setting score values for each gem
+    if(this.sprite === 'images/Gem Blue.png'){
+
+        this.score = 20;
+
+    } else if(this.sprite === 'images/Gem Green.png'){
+
+
+        this.score = 10;
+
+    } else if(this.sprite === 'images/Gem Orange.png'){
+
+        this.score = 5;
+
+    }
+
+
+};
+
+//Renders item on canvas
+Item.prototype.render = function(){
+
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+};
+
+//Used to detect player picking up gem
+Item.prototype.update = function(){
+
+    var playerPosition = player.playerPosition();
+
+    //Range to compensate for floating point comparison
+    var epsilon = 50;
+
+    diffX = Math.abs(this.x - playerPosition[0]);
+    diffY = Math.abs(this.y - playerPosition[1]);
+
+    if(diffX <= epsilon && diffY <= epsilon){
+        //'Removes' gem from game
+        this.x = 600;
+        this.y = 600;
+        player.increaseScore(this.score);
+
+
+    }
 
 
 
+};
 
-
-
-
-// };
 
 
 
@@ -200,12 +273,18 @@ Player.prototype.render = function() {
 var enemy1 = new Enemy();
 var enemy2 = new Enemy();
 var enemy3 = new Enemy();
+var item1 = new Item();
+var item2 = new Item();
+var item3 = new Item();
 var player = new Player();
 var allEnemies = [];
 
 allEnemies.push(enemy1);
 allEnemies.push(enemy2);
 allEnemies.push(enemy3);
+allEnemies.push(item1);
+allEnemies.push(item2);
+allEnemies.push(item3);
 
 
 

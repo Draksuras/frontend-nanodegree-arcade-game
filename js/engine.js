@@ -92,7 +92,16 @@ var Engine = (function(global) {
      */
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
-            enemy.update(dt);
+            if(enemy instanceof Enemy){
+
+                enemy.update(dt);
+
+            } else{
+
+                enemy.update();
+            }
+
+            
         });
         player.update();
     }
