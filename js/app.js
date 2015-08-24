@@ -96,6 +96,10 @@ Player.prototype.handleInput = function(key){
 
             this.y -= 85;
 
+        } else if((this.y -85 <= 0)){
+
+            this.setPlayerPosition(canvasWidth * 0.4, canvasHeight * 0.65);
+
         }
         
 
