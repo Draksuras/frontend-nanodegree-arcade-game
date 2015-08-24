@@ -1,6 +1,8 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Instructions:
 
-for self-checking their submission.
+    Try to reach the river without hitting any of the lady bugs. Get gems to obtain a higher score!
+
+    Move with arrow keys and score resets whenever you hit an enemy.

@@ -106,7 +106,7 @@ Player.prototype.handleInput = function(key){
 
             this.setPlayerPosition(canvasWidth * 0.4, canvasHeight * 0.65);
             this.score += 10;
-            console.log(this.score);
+            
 
         }
         
