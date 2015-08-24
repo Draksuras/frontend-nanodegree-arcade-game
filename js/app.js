@@ -137,7 +137,6 @@ Player.prototype.handleInput = function(key){
         
     }
 
-
 };
 
 //Not used, but overwrites Enemy update
@@ -161,6 +160,37 @@ Player.prototype.setPlayerPosition = function(x,y){
     this.y = y;
 
 };
+
+Player.prototype.render = function() {
+
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+    //Renders current player score onto canvas
+
+    ctx.font = "20px Arial";
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "black";
+    ctx.strokeText("Current Score: " + this.score, 5, 70);
+    ctx.fillStyle = "white";
+    ctx.fillText("Current Score: " + this.score, 5, 70);
+
+
+}
+
+
+// var Item = function(){
+
+//     var gems = ['images/Gem Blue.png','images/Gem Green.png','images/Gem Orange.png'];
+
+
+
+
+
+
+
+// };
+
+
 
 
 // Now instantiate your objects.
