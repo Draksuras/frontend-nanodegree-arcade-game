@@ -9,3 +9,6 @@ Game Instructions:
     Try to reach the river without hitting any of the lady bugs. Get gems to obtain a higher score!
 
     Move with the arrow keys; the score resets whenever you hit an enemy.
+
+Source code documentation contained in 'out' folder. Open the index.html to view.
+
