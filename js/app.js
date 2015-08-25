@@ -1,7 +1,7 @@
-var canvasWidth = 505;
-var canvasHeight = 606;
+var CANVAS_WIDTH = 505;
+var CANVAS_HEIGHT = 606;
 
-var startingXLocations = [0, 101, 202, 405]
+var startingXLocations = [0, 101, 202, 405];
 var startingYLocations = [55, 140, 220];
 
 // Enemies our player must avoid
@@ -35,12 +35,12 @@ Enemy.prototype.update = function(dt) {
     //Range to compensate for floating point comparison
     var epsilon = 50;
 
-    diffX = Math.abs(this.x - playerPosition[0]);
-    diffY = Math.abs(this.y - playerPosition[1]);
+    var diffX = Math.abs(this.x - playerPosition[0]);
+    var diffY = Math.abs(this.y - playerPosition[1]);
 
     this.x += this.speed * dt;
 
-    if(this.x > canvasWidth){
+    if(this.x > CANVAS_WIDTH){
 
         this.x = -50;
         this.y = startingYLocations[Math.floor(Math.random() * startingYLocations.length)];
@@ -49,7 +49,7 @@ Enemy.prototype.update = function(dt) {
 
     if(diffX <= epsilon && diffY <= epsilon){
 
-        player.setPlayerPosition(canvasWidth*.4, canvasHeight * .65);
+        player.setPlayerPosition(CANVAS_WIDTH*0.4, CANVAS_HEIGHT * 0.65);
         player.resetScore();
 
 
@@ -76,8 +76,8 @@ var Player = function() {
     this.sprite = 'images/char-cat-girl.png';
 
     //Setting position to starting tile
-    this.x = canvasWidth *.4;
-    this.y = canvasHeight * .65;
+    this.x = CANVAS_WIDTH *0.4;
+    this.y = CANVAS_HEIGHT * 0.65;
 
     //Initial player score
     this.score = 0;
@@ -87,10 +87,6 @@ var Player = function() {
 };
 
 
-//Delegating methods to Enemy class
-Player.prototype = Object.create(Enemy.prototype);
-Player.prototype.constructor = Player;
-
 //Adding additional methods
 
 //Handles player input using arrow keys
@@ -98,13 +94,13 @@ Player.prototype.handleInput = function(key){
 
 
     if(key === 'up'){
-        if((this.y - 85) > 0){
+        if((this.y - 83) > 0){
 
-            this.y -= 85;
+            this.y -= 83;
 
-        } else if((this.y -85 <= 0)){
+        } else if((this.y -83 <= 0)){
 
-            this.setPlayerPosition(canvasWidth * 0.4, canvasHeight * 0.65);
+            this.setPlayerPosition(CANVAS_WIDTH * 0.4, CANVAS_HEIGHT * 0.65);
             this.score += 10;
             
 
@@ -113,9 +109,9 @@ Player.prototype.handleInput = function(key){
 
     } else if(key === 'down'){
 
-        if((this.y + 85) < canvasHeight - 150){
+        if((this.y + 83) < CANVAS_HEIGHT - 150){
             
-            this.y += 85;
+            this.y += 83;
 
         }
         
@@ -123,7 +119,7 @@ Player.prototype.handleInput = function(key){
 
     } else if(key === 'left'){
 
-        if((this.x - 100) > 0){
+        if((this.x - 101) > 0){
             
             this.x -= 100;
 
@@ -131,7 +127,7 @@ Player.prototype.handleInput = function(key){
 
     } else if(key ==='right'){
 
-        if((this.x + 100) < canvasWidth - 100){
+        if((this.x + 101) <= CANVAS_WIDTH - 101){
 
             this.x += 100;
 
@@ -246,8 +242,8 @@ Item.prototype.update = function(){
     //Range to compensate for floating point comparison
     var epsilon = 50;
 
-    diffX = Math.abs(this.x - playerPosition[0]);
-    diffY = Math.abs(this.y - playerPosition[1]);
+    var diffX = Math.abs(this.x - playerPosition[0]);
+    var diffY = Math.abs(this.y - playerPosition[1]);
 
     if(diffX <= epsilon && diffY <= epsilon){
         //'Removes' gem from game
@@ -270,23 +266,22 @@ Item.prototype.update = function(){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-var enemy1 = new Enemy();
-var enemy2 = new Enemy();
-var enemy3 = new Enemy();
-var item1 = new Item();
-var item2 = new Item();
-var item3 = new Item();
 var player = new Player();
 var allEnemies = [];
 
-allEnemies.push(enemy1);
-allEnemies.push(enemy2);
-allEnemies.push(enemy3);
-allEnemies.push(item1);
-allEnemies.push(item2);
-allEnemies.push(item3);
+for(var i = 0; i < 6; i++){
 
+    if(i < 3){
 
+        allEnemies.push(new Enemy());
+
+    } else{
+
+        allEnemies.push(new Item());
+
+    }
+
+}
 
 
 // This listens for key presses and sends the keys to your
